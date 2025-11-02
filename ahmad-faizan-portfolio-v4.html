@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>M. Ahmad Faizan — Generative Portfolio (v4)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#f0f7ff; --bg2:#ffffff; --bg3:#effcf6;
+      --card:rgba(255,255,255,.7);
+      --ring:rgba(31, 120, 255,.25);
+      --text:#0f172a;
+      --muted:#475569;
+      --accent:#0ea5e9;
+      --accent-2:#22c55e;
+      --btn:#0ea5e9;
+      --btn-contrast:#fff;
+      --shadow: 0 10px 30px rgba(2,6,23,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;}
+    body{
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, var(--bg1), transparent 70%),
+        radial-gradient(900px 500px at 100% -20%, var(--bg3), transparent 70%),
+        linear-gradient(180deg, var(--bg2), #f8fafc 60%, #eef2ff);
+      overflow-x:hidden;
+    }
+    .noise::before{
+      content:""; position:fixed; inset:0; pointer-events:none; z-index:1;
+      background-image:url('data:image/svg+xml;utf8,\
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">\
+        <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter>\
+        <rect width="100%" height="100%" filter="url(%23n)" opacity=".025"/></svg>');
+      mix-blend-mode:multiply;
+    }
+    .container{max-width:1120px; margin:0 auto; padding:0 20px;}
+    header.hero{position:relative; padding:72px 0 28px;}
+    .halo{--s: clamp(260px, 40vw, 520px); position:absolute; inset:0; overflow:visible; pointer-events:none;}
+    .halo .blob{position:absolute; border-radius:50%; filter: blur(60px); opacity:.6; transform:translateZ(0); animation: float 14s ease-in-out infinite;}
+    .halo .b1{ width:var(--s); height:var(--s); top:-120px; left:-80px; background:#93c5fd;}
+    .halo .b2{ width:calc(var(--s)*.75); height:calc(var(--s)*.75); top:-160px; right:-100px; background:#a7f3d0; animation-duration:17s;}
+    .halo .b3{ width:calc(var(--s)*.55); height:calc(var(--s)*.55); bottom:-120px; right:10%; background:#e9d5ff; animation-duration:20s;}
+    @keyframes float{ 0%,100%{ transform:translate3d(0,0,0);} 50%{transform:translate3d(0,-12px,0) scale(1.02);}}
+    .brand{display:flex; flex-direction:column; gap:8px;}
+    h1{font-size:clamp(28px, 5vw, 44px); line-height:1.1; margin:0; font-weight:800; letter-spacing:-0.02em;}
+    .title{color:var(--muted); font-size:clamp(14px, 2.6vw, 18px);}
+    .meta{display:flex; flex-wrap:wrap; gap:8px 14px; margin-top:10px; color:var(--muted); font-size:14px;}
+    .badge{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; font-size:12px; font-weight:600; background:var(--card); border:1px solid var(--ring); box-shadow:var(--shadow); backdrop-filter: saturate(160%) blur(8px);}
+    .row{display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:16px;}
+    .cta{display:flex; flex-wrap:wrap; gap:10px;}
+    .btn{appearance:none; border:0; border-radius:14px; padding:12px 16px; font-weight:700; cursor:pointer; box-shadow:var(--shadow); transition:.2s transform, .2s opacity, .2s box-shadow; display:inline-flex; gap:10px; align-items:center;}
+    .btn.primary{background:var(--btn); color:var(--btn-contrast);} .btn.ghost{background:var(--card); color:var(--text); border:1px solid var(--ring);} .btn:hover{transform:translateY(-1px);}
+    .summary{margin-top:18px; color:#1f2937; max-width:820px; font-size:16px;}
+    .tagline{margin-top:10px; font-weight:800; color:var(--accent);}
+    section{padding:28px 0 0;}
+    .grid{display:grid; gap:14px;}
+    .card{background:var(--card); border:1px solid var(--ring); border-radius:20px; padding:18px; box-shadow:var(--shadow); backdrop-filter: saturate(160%) blur(8px);}
+    .card h3{margin:0; font-size:18px;} .muted{color:var(--muted); font-size:14px;}
+    .kicker{display:flex; align-items:center; gap:10px; margin-bottom:10px; font-weight:800;} .kicker .dot{width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 6px rgba(14,165,233,.12);}
+    .two{display:grid; gap:14px;} @media (min-width:860px){.two{grid-template-columns:1fr 1fr;}}
+    .three{display:grid; gap:14px;} @media (min-width:900px){.three{grid-template-columns:repeat(3,1fr);}}
+    .proj-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;} .tag{font-size:11px; padding:6px 10px; background:#eef2ff; color:#3730a3; border-radius:999px;}
+    .contact-grid{display:grid; gap:18px;} @media (min-width:860px){.contact-grid{grid-template-columns:1fr 1fr;}}
+    input, textarea{width:100%; border-radius:14px; border:1px solid var(--ring); padding:12px 14px; font:inherit; background:rgba(255,255,255,.9); outline:none; box-shadow:var(--shadow);} input:focus, textarea:focus{border-color:var(--accent); box-shadow:0 0 0 4px rgba(14,165,233,.18);}
+    footer{margin-top:36px; padding:20px 0; border-top:1px solid rgba(2,6,23,.06); background:rgba(255,255,255,.6); backdrop-filter:saturate(160%) blur(6px);}
+    .reveal{opacity:0; transform: translateY(8px); transition: .6s ease;} .reveal.show{opacity:1; transform:none;}
+
+    /* Circular meters */
+    .skills-wrap{display:grid; gap:16px;}
+    @media (min-width:760px){.skills-wrap{grid-template-columns: 1.2fr 1fr;}}
+    .circle-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px;}
+    @media (min-width:540px){.circle-grid{grid-template-columns:repeat(3,1fr);}}
+    @media (min-width:920px){.circle-grid{grid-template-columns:repeat(4,1fr);}}
+    .meter{display:flex; align-items:center; gap:12px; background:var(--card); border:1px solid var(--ring); border-radius:14px; padding:12px; box-shadow:var(--shadow);}
+    .meter svg{width:56px; height:56px; transform:rotate(-90deg);} .meter .label{font-weight:800; font-size:14px;}
+    .chips{display:flex; flex-wrap:wrap; gap:10px;} .chip{font-size:12px; padding:10px 12px; border-radius:999px; background:rgba(255,255,255,.85); border:1px solid var(--ring); box-shadow:var(--shadow);}
+  </style>
+</head>
+<body class="noise">
+  <div class="halo" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+
+  <header class="hero">
+    <div class="container">
+      <div class="row">
+        <div class="brand">
+          <h1>Muhammad Ahmad Faizan</h1>
+          <div class="title">Aspiring Part-Time Teacher & Freelance Software Developer</div>
+          <div class="meta">
+            <span>📍 Sahiwal, Punjab, Pakistan</span>
+            <a href="mailto:ace786444@gmail.com" style="text-decoration:none; color:inherit;">✉️ ace786444@gmail.com</a>
+            <a href="tel:+923126031554" style="text-decoration:none; color:inherit;">📞 +92 312 6031554</a>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:12px">
+            <span class="badge">Teaching</span>
+            <span class="badge">.NET / Blazor</span>
+            <span class="badge">C# / SQL</span>
+            <span class="badge">Public Speaking</span>
+          </div>
+        </div>
+        <div class="cta">
+          <button class="btn primary" id="genBtn">🪄 Generate Theme</button>
+          <a class="btn ghost" href="#projects">🚀 View Projects</a>
+          <a class="btn ghost" href="#contact">🤝 Get in Touch</a>
+        </div>
+      </div>
+      <p class="summary">
+        BSIT (5th semester) with strong teaching, public speaking, and practical software development skills.
+        2+ years home-tuition experience and 9 months of C#/.NET (Blazor) work.
+        I turn complex ideas into clear lessons and ship useful software.
+      </p>
+      <div class="tagline" id="tagline">A friendly teacher who ships.</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <!-- SKILLS with circular meters -->
+      <section class="reveal" id="skills">
+        <div class="kicker"><span class="dot"></span><span>Skills</span></div>
+        <div class="skills-wrap">
+          <div class="card">
+            <h3 style="margin-bottom:10px">Core Tech</h3>
+            <div class="circle-grid" id="circleGrid"></div>
+          </div>
+          <div class="card">
+            <h3 style="margin-bottom:10px">Other Skills</h3>
+            <div class="chips">
+              <span class="chip">Communication</span>
+              <span class="chip">Lesson Planning</span>
+              <span class="chip">Concept Breakdown</span>
+              <span class="chip">Formative Assessment</span>
+              <span class="chip">Public Speaking</span>
+              <span class="chip">Urdu/English Bilingual</span>
+              <span class="chip">Overleaf (LaTeX)</span>
+              <span class="chip">Excel</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="reveal" id="experience">
+        <div class="kicker"><span class="dot"></span><span>Experience</span></div>
+        <div class="two">
+          <div class="card">
+            <h3>Home Tuition Teacher (Grades 8–11)</h3>
+            <div class="muted">Divisional Public School & Bregma Grammar (students) • 2022 – Present</div>
+            <ul>
+              <li>Taught Computer, Mathematics, and Science (Grades 8–11).</li>
+              <li>Boosted learner confidence via interactive questioning and continuous feedback.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Software Developer (C#, .NET, Blazor)</h3>
+            <div class="muted">Camco / Freelance • 9 months</div>
+            <ul>
+              <li>Built a CRUD Speeds & Feeds Management System for industrial machining.</li>
+              <li>Integrated SQL-backed modules for tool data, material specs, and process parameters.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Academic & Technical Assignment Developer (Freelance)</h3>
+            <div class="muted">UQ, VIT students (international) • 2022 – Present</div>
+            <ul>
+              <li>Delivered programming and technical assignments (web, DB design, SWE, data structures).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS (with 2 new ones) -->
+      <section class="reveal" id="projects">
+        <div class="kicker"><span class="dot"></span><span>Projects</span></div>
+        <div class="three">
+          <div class="card">
+            <h3>Student Progress Tracker (Blazor/.NET)</h3>
+            <div class="muted">CRUD app for student records with filtering and export to Excel/PDF.</div>
+            <div class="proj-tags"><span class="tag">Blazor</span><span class="tag">.NET</span><span class="tag">SQL</span><span class="tag">Excel</span><span class="tag">PDF</span></div>
+          </div>
+          <div class="card">
+            <h3>Quiz & Practice Sheets Generator</h3>
+            <div class="muted">Automatically creates practice questions and answer keys for Grades 8–10.</div>
+            <div class="proj-tags"><span class="tag">Generators</span><span class="tag">Education</span><span class="tag">C#</span><span class="tag">.NET</span></div>
+          </div>
+          <div class="card">
+            <h3>Feeds & Speeds (CRUD App)</h3>
+            <div class="muted">Industrial machining data manager for tools, materials, and process parameters.</div>
+            <div class="proj-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">Blazor</span><span class="tag">SQL</span></div>
+          </div>
+          <div class="card">
+            <h3>Python Mini Games Toolkit</h3>
+            <div class="muted">A small suite of arcade-style games: menu, levels, and scoring utilities.</div>
+            <div class="proj-tags"><span class="tag">Python</span><span class="tag">Pygame</span><span class="tag">Toolkit</span></div>
+          </div>
+          <div class="card">
+            <h3>CRUD Speeds & Feeds (Alt)</h3>
+            <div class="muted">Experiment branch with UI redesign and batch import/export.</div>
+            <div class="proj-tags"><span class="tag">C#</span><span class="tag">.NET</span><span class="tag">Blazor</span><span class="tag">CSV</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="reveal" id="contact">
+        <div class="kicker"><span class="dot"></span><span>Contact</span></div>
+        <div class="contact-grid">
+          <div class="card">
+            <p class="muted">Want to collaborate, hire for tutoring, or need a small app built? Drop a message—I usually respond within a day.</p>
+            <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px">
+              <a href="mailto:ace786444@gmail.com">✉️ ace786444@gmail.com</a>
+              <a href="tel:+923126031554">📞 +92 312 6031554</a>
+              <span>📍 Sahiwal, Punjab, Pakistan</span>
+            </div>
+          </div>
+          <form class="card" action="mailto:ace786444@gmail.com" method="post" enctype="text/plain">
+            <input name="name" placeholder="Your name" required/>
+            <input name="email" placeholder="Your email" required/>
+            <textarea name="message" rows="4" placeholder="Your message" required></textarea>
+            <button class="btn primary" type="submit">Send</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between; color:#475569; font-size:14px;">
+      <div>© <span id="year"></span> Muhammad Ahmad Faizan</div>
+      <div>Built with a splash of generative flair ✨</div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme palettes
+    const THEMES = [
+      {accent:'#0ea5e9', second:'#22c55e', halo1:'#93c5fd', halo2:'#a7f3d0', halo3:'#e9d5ff', bg1:'#f0f7ff', bg3:'#effcf6', btn:'#0ea5e9'},
+      {accent:'#8b5cf6', second:'#06b6d4', halo1:'#c4b5fd', halo2:'#99f6e4', halo3:'#fecaca', bg1:'#f5f3ff', bg3:'#ecfeff', btn:'#8b5cf6'},
+      {accent:'#ef4444', second:'#22c55e', halo1:'#fecaca', halo2:'#bbf7d0', halo3:'#fde68a', bg1:'#fff1f2', bg3:'#f0fdf4', btn:'#ef4444'},
+      {accent:'#10b981', second:'#3b82f6', halo1:'#a7f3d0', halo2:'#bfdbfe', halo3:'#fbcfe8', bg1:'#ecfeff', bg3:'#f0fdf4', btn:'#10b981'},
+      {accent:'#f59e0b', second:'#6366f1', halo1:'#fde68a', halo2:'#c7d2fe', halo3:'#fca5a5', bg1:'#fffbeb', bg3:'#eef2ff', btn:'#f59e0b'}
+    ];
+    const ADJ = ['curious','driven','craft-minded','student-first','practical','friendly','clear-speaking','reliable','fast-learning','creator'];
+    const ROLE = ['teacher','.NET dev','Blazor builder','problem solver','mentor','tutor'];
+    const $ = (sel)=>document.querySelector(sel);
+
+    function applyTheme(t){
+      document.documentElement.style.setProperty('--accent', t.accent);
+      document.documentElement.style.setProperty('--btn', t.btn);
+      document.documentElement.style.setProperty('--bg1', t.bg1);
+      document.documentElement.style.setProperty('--bg3', t.bg3);
+      document.querySelector('.halo .b1').style.background = t.halo1;
+      document.querySelector('.halo .b2').style.background = t.halo2;
+      document.querySelector('.halo .b3').style.background = t.halo3;
+      document.querySelectorAll('.dot').forEach(d=>{
+        d.style.background = t.accent;
+        d.style.boxShadow = `0 0 0 6px ${hexToRgba(t.accent, .15)}`;
+      });
+      $('.tagline').style.color = t.accent;
+      document.querySelectorAll('.btn.primary').forEach(b=>{ b.style.background = t.btn; b.style.color = '#fff'; });
+      document.querySelectorAll('.meter .fg').forEach(path=> path.style.stroke = t.accent);
+    }
+    function hexToRgba(hex, a){
+      const p = hex.replace('#','');
+      const bigint = parseInt(p.length===3? p.split('').map(c=>c+c).join(''):p, 16);
+      const r = (bigint>>16)&255, g=(bigint>>8)&255, b=bigint&255;
+      return `rgba(${r},${g},${b},${a})`;
+    }
+    function randomPick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+    function regenerate(){
+      applyTheme(randomPick(THEMES));
+      $('#tagline').textContent = `A ${randomPick(ADJ)} ${randomPick(ROLE)} who ships.`;
+      reanimateMeters(); // animate again visually, without changing values
+    }
+
+    // Fixed percentages for core tech
+    const coreSkills = [
+      {name:'C#', value:66},
+      {name:'HTML/CSS/JS', value:90},
+      {name:'.NET', value:70},
+      {name:'Blazor', value:50},
+      {name:'Python', value:75},
+      {name:'SQL', value:80},
+      {name:'Git', value:70}
+    ];
+    function buildMeter(name, pct){
+      const radius = 24, circumference = 2 * Math.PI * radius;
+      const wrapper = document.createElement('div'); wrapper.className='meter';
+      wrapper.innerHTML = `
+        <svg viewBox="0 0 60 60" aria-hidden="true">
+          <circle class="bg" cx="30" cy="30" r="${radius}" stroke="rgba(15,23,42,.12)" stroke-width="8" fill="none" />
+          <circle class="fg" cx="30" cy="30" r="${radius}" stroke="var(--accent)" stroke-width="8" fill="none"
+                  stroke-linecap="round" stroke-dasharray="${circumference}" stroke-dashoffset="${circumference}" />
+        </svg>
+        <div>
+          <div class="label">${name}</div>
+          <div class="muted">${pct}%</div>
+        </div>`;
+      wrapper.dataset.pct = pct;
+      return wrapper;
+    }
+    function renderMeters(){
+      const grid = document.getElementById('circleGrid'); grid.innerHTML='';
+      coreSkills.forEach(s => grid.appendChild(buildMeter(s.name, s.value)));
+    }
+    function reanimateMeters(){
+      document.querySelectorAll('.meter').forEach(m => {
+        const pct = +m.dataset.pct;
+        const fg = m.querySelector('.fg');
+        const r = 24, C = 2*Math.PI*r;
+        const target = C * (1 - pct/100);
+        fg.getBoundingClientRect(); // force style flush
+        fg.style.transition = 'stroke-dashoffset 1.2s ease';
+        fg.style.strokeDashoffset = target;
+      });
+    }
+
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+    }, {threshold:.2});
+    document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+
+    // Init
+    document.getElementById('genBtn').addEventListener('click', regenerate);
+    document.getElementById('year').textContent = new Date().getFullYear?.() || new Date().getFullYear;
+    renderMeters(); reanimateMeters(); regenerate();
+  </script>
+</body>
+</html>
